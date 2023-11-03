@@ -29,6 +29,11 @@ diamonds <- diamonds %>% rename(
 ```{r}
 # Do some preliminary investigations & cleaning
 
+diamonds <- diamonds %>% filter(length_mm != 0) %>% filter(width_mm != 0) %>% filter(depth_mm != 0)
+
+diamonds %>% count(cut)
+diamonds %>% count(color)
+diamonds %>% count(clarity) 
 
 
 
@@ -44,13 +49,13 @@ diamonds <- diamonds %>%
 
 # Overall table_mm arithmetic mean?
 
-
+diamonds %>% summarise(avg_table_mm = mean(table_mm, na.rm = T))
 
 
 
 
 # table_mm arithmetic mean within each clarity category
-
+diamonds %>% group_by(clarity) %>% summarise(avg_table_mm = mean(table_mm, na.rm = T))
 
 
 
